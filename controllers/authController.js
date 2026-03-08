@@ -1,6 +1,6 @@
 import User from "../models/user.js";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { generateToken } from "../utils/generateToken.js";
 
 //register user
 export const registerUser = async (req, res) => {
@@ -35,15 +35,7 @@ export const registerUser = async (req, res) => {
     });
 
     //create a token
-    const token = jwt.sign(
-      { id: createdUser._id },
-      process.env.JWT_SECRET_KEY,
-      { expiresIn: "7d" },
-    );
-    res.cookie("token", token, {
-      httpOnly: true,
-      sameSite: "strict",
-    });
+    generateToken(res, createdUser._id);
 
     res.redirect("/home");
   } catch (err) {
@@ -79,13 +71,7 @@ export const loginUser = async (req, res) => {
     }
 
     //create a token
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, {
-      expiresIn: "7d",
-    });
-    res.cookie("token", token, {
-      httpOnly: true,
-      sameSite: "strict",
-    });
+    generateToken(res, user._id);
 
     res.redirect("/home");
   } catch (err) {
