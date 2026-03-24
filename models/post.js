@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const postSchema = mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   date: { type: Date, default: Date.now },
+  title: { type: String },
   content: { type: String },
   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 });

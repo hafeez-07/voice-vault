@@ -4,16 +4,23 @@ import User from "../models/user.js";
 //post a blog
 export const postBlog = async (req, res) => {
   try {
-    const content = req.body.content;
+    const { title, content } = req.body;
+    if (!title || title.trim() === "" || !content || content.trim() === "") {
+      req.flash("error", "Blog title or body cannot be empty");
+      return res.redirect("/home");
+    }
     const userId = req.user.id;
+
     const user = await User.findById(userId);
     const newPost = await Post.create({
       user: user._id,
+      title,
       content,
     });
     await User.findByIdAndUpdate(userId, {
       $push: { posts: newPost._id },
     });
+
     res.status(200).redirect("/home");
   } catch (err) {
     res.status(500).json({
