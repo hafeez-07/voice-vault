@@ -37,6 +37,40 @@ export const allBlog = async (req, res) => {
   res.render("blogs", { posts, user });
 };
 
+//read one blog
+export const readBlog = async (req, res) => {
+  try {
+    const userId = req.user?.id;
+    const postId = req.params.id;
+
+    const user = await User.findById(userId);
+
+    if (!userId || !user) {
+      return res.status(401).json({
+        error: "Unauthorized access",
+      });
+    }
+
+    if (!postId) {
+      return res.status(404).json({
+        error: "post id is required",
+      });
+    }
+
+    const post = await Post.findById(postId).populate("user","username profilePic");
+    if (!post) {
+      return res.status(404).json({
+        error: "post not found",
+      });
+    }
+    return res.render("blog", { post, user });
+  } catch (err) {
+    res.status(500).json({
+      error: err.message,
+    });
+  }
+};
+
 //delete a blog
 export const deleteBlog = async (req, res) => {
   try {

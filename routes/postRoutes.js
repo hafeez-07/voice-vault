@@ -10,10 +10,12 @@ import {
   updateBlog,
   likeBlog,
   likedUsers,
+  readBlog,
 } from "../controllers/postController.js";
 
 router.post("/post", protect, postBlog);
 router.get("/blogs", protect, allBlog);
+router.get("/blog/:id",protect, readBlog);
 router.get("/delete/:postId", protect, deleteBlog);
 router.get("/edit/:postId", protect, editBlog);
 router.post("/update/:postId", protect, updateBlog);

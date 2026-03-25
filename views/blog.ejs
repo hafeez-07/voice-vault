@@ -1,0 +1,47 @@
+<%- include('./partials/header.ejs') %> <%- include('./partials/navbar.ejs') %>
+
+<div
+  class="grow w-full max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto py-10 px-5"
+>
+  <div
+    class="flex flex-col bg-zinc-800 rounded-2xl shadow-xl hover:shadow-orange-500/10 transition duration-300 ease-in border border-zinc-700"
+  >
+    <div class="flex items-center gap-3 mb-4 p-5">
+      <a href="<%= post.user.profilePic %>" class="h-10 w-10">
+        <img
+          class="rounded-[50%] w-10 h-10 object-cover"
+          src="<%=post.user.profilePic%>"
+          alt="profile"
+        />
+      </a>
+      <h3 class="text-orange-400/80 font-semibold mb-2">
+        <%= post.user.username %>
+      </h3>
+    </div>
+
+    <div class="grow p-5">
+      <div class="text-xl font-semibold"><%=post.title%></div>
+      <p class="py-3 text-zinc-300 text-sm leading-relaxed">
+        <%= post.content %>
+        
+      </p>
+    </div>
+
+    <div
+      class="flex border-t border-zinc-600 justify-between mt-auto text-sm p-5"
+    >
+      <div><%=post.date.toLocaleDateString() %></div>
+      <div class="flex gap-3">
+        <a href="/like/<%=post._id %>">
+          <%= (post.likes.some((id) => id.toString()===user._id.toString())) ?
+          'Like ❤️' : 'Like 🤍'%>
+        </a>
+        <div class="text-sm text-zinc-400">
+          <a href="/likes/<%=post._id%>"><%= post.likes.length %> likes</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('./partials/footer.ejs') %>
