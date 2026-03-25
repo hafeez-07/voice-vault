@@ -606,6 +606,10 @@ video {
   pointer-events: none;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
 }
@@ -636,6 +640,10 @@ video {
 
 .top-full {
   top: 100%;
+}
+
+.z-50 {
+  z-index: 50;
 }
 
 .mx-2 {

@@ -15,7 +15,7 @@
   <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-8">
     <!-- Left Side Profile -->
     <div
-      class="bg-zinc-900/70 backdrop-blur border border-zinc-800 rounded-2xl p-8 flex flex-col items-center shadow-xl"
+      class="bg-zinc-900/70 border border-zinc-800 rounded-2xl p-8 flex flex-col items-center shadow-xl"
     >
       <div class="relative group">
         <a href="<%=user.profilePic%>">
@@ -58,7 +58,7 @@
 
     <!-- Right Side Form -->
     <div
-      class="md:col-span-2 bg-zinc-900/70 backdrop-blur border border-zinc-800 rounded-2xl p-10 shadow-xl"
+      class="md:col-span-2 bg-zinc-900/70 border border-zinc-800 rounded-2xl p-10 shadow-xl"
     >
       <form class="space-y-6" action="/profile/update" method="post">
         <div>
@@ -102,12 +102,7 @@
         </div>
 
         <div class="pt-4">
-          <button
-            type="submit"
-            class="submit-button"
-          >
-            Save Changes
-          </button>
+          <button type="submit" class="submit-button">Save Changes</button>
         </div>
       </form>
     </div>
